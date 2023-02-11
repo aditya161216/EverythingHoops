@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from './components/Homepage';
 import Header from "./components/Links";
-import Player from "./components/player";
 import Datepage from "./components/pages/DateInTime";
 import PlayerStats from "./components/player/PlayerStats";
 import './App.css';
