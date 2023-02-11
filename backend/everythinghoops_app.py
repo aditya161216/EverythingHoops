@@ -11,7 +11,7 @@ app = Flask(__name__)
 # load database from pickled players_df and boxscore_df
 hoops_data = EverythingHoopsAPI()
 # hoops_data.players_df = pickle.load(open("data/players_df.pkl", "rb"))
-hoops_data.boxscore_df = pickle.load(open("data/boxscore_df.pkl", "rb"))
+hoops_data.boxscore_df = pickle.load(open("/backend/data/boxscore_df.pkl", "rb"))
 
 @app.route("/")
 def home():

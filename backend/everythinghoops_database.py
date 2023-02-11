@@ -48,7 +48,7 @@ class EverythingHoopsAPI:
         # pickle players_df if not empty
         if not self.players_df.empty:
             # pickle players_df
-            self.players_df.to_pickle("data/players_df.pkl")
+            self.players_df.to_pickle("/backend/data/players_df.pkl")
         else:
             # warning message
             print("players_df is empty")
@@ -57,7 +57,7 @@ class EverythingHoopsAPI:
         # pickle boxscore_df if not empty
         if not self.boxscore_df.empty:
              # pickle boxscore_df
-            self.boxscore_df.to_pickle("data/boxscore_df.pkl")
+            self.boxscore_df.to_pickle("/backend/data/boxscore_df.pkl")
         else:
             # warning message
             print("boxscore_df is empty")
@@ -78,7 +78,7 @@ def main():
 
     # SAMPLE DATA
     # read in jokic csv
-    hoops.read_boxscore_csv("data/jokic.csv")
+    hoops.read_boxscore_csv("/backend/data/jokic.csv")
 
     # pickle data
     hoops.pickle_data()
