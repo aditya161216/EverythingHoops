@@ -4,14 +4,17 @@ Flask app for EverythingHoops API
 
 from everythinghoops_database import EverythingHoopsAPI
 import pickle
-from flask import Flask, request
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # load database from pickled players_df and boxscore_df
 hoops_data = EverythingHoopsAPI()
 # hoops_data.players_df = pickle.load(open("data/players_df.pkl", "rb"))
 hoops_data.boxscore_df = pickle.load(open("/backend/data/boxscore_df.pkl", "rb"))
+
 
 @app.route("/")
 def home():
@@ -27,12 +30,14 @@ def home():
 #     """
 #     return hoops_data.players_df.to_json()
 
+
 @app.route("/boxscore")
 def boxscore():
     """
     Boxscore page
     """
-    return hoops_data.boxscore_df.to_json()
+    return jsonify(hoops_data.boxscore_df.to_dict())
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
