@@ -7,7 +7,7 @@ const Header = () => {
 
     return (
         <div>
-            <div className="flex justify-evenly">
+            <div className="flex mx-96">
                 <div className=""> 
                     Everything Hoops
                 </div>
