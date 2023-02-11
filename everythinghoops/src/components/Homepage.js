@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   //Points Rebounds, and Assists are set to 0/1, but if updated it w
@@ -10,6 +11,17 @@ const HomePage = () => {
     const [assists, setAssists] = useState(0);
 
     const nbateams = [];
+
+    useEffect( () => {
+      fetch("/").then(
+        res => res.json()
+      ).then (
+        data => {
+          console.log(data);
+        }
+      )
+    })
+
     const beginQuery = async() => {
 
     }
@@ -34,18 +46,18 @@ const HomePage = () => {
 
                 <div className="flex flex-row">
                   <span>Rebounds</span>
-                  <input vaule={rebounds} type="number" placeholder="0" onChange={(e) => setRebounds(e.target.value)}></input>
+                  <input className="pl-4 w-24"vaule={rebounds} type="number" placeholder="0" onChange={(e) => setRebounds(e.target.value)}></input>
                 </div>
 
                 <div className="flex flex-row">
                   <span>Assists</span>
-                  <input vaule={assists} type="number" placeholder="0" onChange={(e) => setAssists(e.target.value)}></input>
+                  <input className="pl-4 w-24" vaule={assists} type="number" placeholder="0" onChange={(e) => setAssists(e.target.value)}></input>
                 </div>
               </div>            
 
 
               <div className="flex flex-col">
-                <span> Optional:</span>
+                <span className="font-bold"> Optional:</span>
                 <div className="flex">
                   Select a Range for how long you want to match this performance: 
                   <input vaule={dates} type="number" placeholder="1" onChange={(e) => setDates(e.target.value)}></input>

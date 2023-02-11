@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />}/>
           <Route path="/players" element={<p> I want this to be the url where you search for players</p>}/>
-          <Route path="/performance" element={<Datepage/>}/>
+          <Route path="/date" element={<Datepage/>}/>
           <Route path= "/players/:playerId/Stats" element={<PlayerStats/>}/>
           <Route path= "/players/:playerId/Graphs" element={<PlayerGraphs/>}/>
         </Routes>
