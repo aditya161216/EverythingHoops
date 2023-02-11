@@ -12,15 +12,9 @@ const HomePage = () => {
 
     const nbateams = [];
 
-    useEffect( () => {
-      fetch("/").then(
-        res => res.json()
-      ).then (
-        data => {
-          console.log(data);
-        }
-      )
-    })
+    useEffect( () =>{fetch('http://127.0.0.1:5000/boxscore').then(res=> console.log(res.json())).then (data => console.log(data))}, [])
+
+
 
     const beginQuery = async() => {
 
