@@ -21,15 +21,6 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' ,
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart',
-    },
-  },
 };
 
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
@@ -67,8 +58,6 @@ const HomePage = () => {
     //link to other 3 pages, 
 
     //on submit, after we supply the values, we get the actual 
-
-
 
     
 
