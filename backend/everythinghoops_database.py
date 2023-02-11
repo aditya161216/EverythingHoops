@@ -64,7 +64,7 @@ class EverythingHoopsAPI:
 
 def main():
     """
-    Main function to test and add data to database
+    Main function to add data to database
     """
 
     # create EverythingHoopsAPI object
