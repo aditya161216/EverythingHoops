@@ -15,8 +15,10 @@ class EverythingHoopsAPI:
         """
 
         # Dataframes
+        self.players_data_df = pd.DataFrame()
+        self.games_details_df = pd.DataFrame()
+        self.games_df = pd.DataFrame()
         self.players_df = pd.DataFrame()
-        self.boxscore_df = pd.DataFrame()
 
     def read_players_csv(self, csv_path):
         """
