@@ -1,81 +1,66 @@
 import React from "react";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-export const options = {
-  responsive: true,
-};
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => 7),
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => 5),
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
+import { useState } from "react";
 
 const HomePage = () => {
+  //Points Rebounds, and Assists are set to 0/1, but if updated it w
+    const [teams, setTeams] = useState(1);
+    const [dates, setDates] = useState(1);
+    const [points, setPoints] = useState(0);
+    const [rebounds, setRebounds] = useState(0);
+    const [assists, setAssists] = useState(0);
 
-    //title
-    //input fields
+    const nbateams = [];
+    const beginQuery = async() => {
 
-    //below we render the actual results, redirect to different path
-    
-    //different link to other pages? 
+    }
 
-    //player name line graphs and regressions, 
-    //at least this many points rebounds and etc., a date for a specific time
-
-    //enter a data, and gets the best performance on that data, if its valid.
-
-    //link to other 3 pages, 
-
-    //on submit, after we supply the values, we get the actual 
-
+    //PRA, also options to select in certain date ranges, against a certain team, if these stats have occured, these are optional,
+    //certain team -> placeHolder -> all
+    //certain date -> placeHolder -> range
     
 
     return (
-        <div className="flex flex-col">
-            <div className="">
-                Input Points Rebounds Assists
-            </div>
+          <div className="flex flex-col h-screen w-screen">
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <div className="flex flex-row font-sans text-2xl font-bold">
+                Input a specific Totals for Points, Rebonds, and Assists, to see if this statline has been achieved before!
+              </div>
 
-            <div className="flex ">
-                <input type="number" />
-            </div>
+              <div className="flex flex-row gap-x-16 font-sans">
+                <div className="flex flex-row ">
+                  <span>Points</span>
+                  <input className="pl-4 w-24" vaule={points} type="number" placeholder="0" onChange={(e) => setPoints(e.target.value)}></input>
+                </div>
 
-            <div className="flex">
-                <Bar options={options} data={data} />
-            </div>
+                <div className="flex flex-row">
+                  <span>Rebounds</span>
+                  <input vaule={rebounds} type="number" placeholder="0" onChange={(e) => setRebounds(e.target.value)}></input>
+                </div>
 
+                <div className="flex flex-row">
+                  <span>Assists</span>
+                  <input vaule={assists} type="number" placeholder="0" onChange={(e) => setAssists(e.target.value)}></input>
+                </div>
+              </div>            
+
+
+              <div className="flex flex-col">
+                <span> Optional:</span>
+                <div className="flex">
+                  Select a Range for how long you want to match this performance: 
+                  <input vaule={dates} type="number" placeholder="1" onChange={(e) => setDates(e.target.value)}></input>
+                  {console.log(dates)}
+                </div>  
+
+                <div className="flex">
+                  Select for if you want this performance against a certain Team
+                  {/* TODO: create the drop down for this */}
+              </div>
+
+              <button onClick={beginQuery}>Submit!</button>
+          </div>
         </div>
+      </div>
     )
 }
 
