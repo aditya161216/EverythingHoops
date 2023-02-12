@@ -173,6 +173,13 @@ class EverythingHoopsAPI:
         # transpose last 10 games
         last_10_games = last_10_games
 
+        # set null values to 0 if column is float or "None" if column is string
+        for col in last_10_games.columns:
+            if last_10_games[col].dtype == float:
+                last_10_games[col] = last_10_games[col].fillna(0)
+            elif last_10_games[col].dtype == str:
+                last_10_games[col] = last_10_games[col].fillna("None")
+
         # return last 10 games
         return last_10_games
 
@@ -220,6 +227,26 @@ class EverythingHoopsAPI:
 
         # return points, assists, and rebounds
         return statline.to_dict(orient="records")[0]
+
+    def get_all_unique_players(self):
+        """
+        Get all unique players
+        """
+
+        # get all unique players
+        self.games_details_df["PLAYER_NAME"].unique()
+
+        # dict of player names and player names as string
+        player_names = {}
+
+        # iterate through unique players
+        for player in self.games_details_df["PLAYER_NAME"].unique():
+                
+            # add player name to dict
+            player_names[player] = player
+
+        # return player names
+        return player_names
         
         
 def main():
