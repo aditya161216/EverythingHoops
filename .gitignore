@@ -337,4 +337,7 @@ sketch
 # and uncomment the following lines
 # .pnp.*
 
+*.pkl
+**/*.pkl
+
 # End of https://www.toptal.com/developers/gitignore/api/node,python,react,yarn

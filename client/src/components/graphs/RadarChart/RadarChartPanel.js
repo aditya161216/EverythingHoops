@@ -166,9 +166,9 @@ const RadarChartPanel = () => {
                 </div>
                 <div className='flex-col'>
                     <label for="start">Start date: </label>
-                    <input type="date" id="start" name="trip-start"
-                        value="2003-10-05"
-                        min="2003-10-05" max="2022-12-22" />
+                    <input type="date"
+                        id="start"
+                        value="2000-01-21"/>
                 </div>
 
                 <div className='flex-col'>

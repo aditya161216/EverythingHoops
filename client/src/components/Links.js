@@ -5,8 +5,8 @@ const Header = () => {
 
     return (
         <div>
-            <div className="flex justify-evenly">
-                <div className=""> 
+            <div className="flex justify-evenly bg-black text-white font-sans">
+                <div className="font-sans text-xl font-bold"> 
                     Everything Hoops
                 </div>
 

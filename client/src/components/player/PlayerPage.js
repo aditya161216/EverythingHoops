@@ -1,6 +1,7 @@
 import React from "react";
 import 'react-tabs/style/react-tabs.css';
 import PlayerTabs from "./playerTabs.js";
+import { useEffect , useState} from "react";
 
 
 // options with default values
@@ -14,17 +15,52 @@ const options = {
 };
 
 
-const PlayerPage = () => {
+const PlayerPage = ({playerName}) => {
+  //search for full name:
+
+  const [player, setPlayer] = useState(null);
+
+  const changeString = () => {
+    let number = playerName.replaceAll(" ", "%20");
+    console.log(number);
+    let url = "http://127.0.0.1:8000/player?player_name="
+    let concat = url.concat(number);
+    console.log(concat)
+    return concat
+}
+
+const createIDString  = () => {
+    let url = "https://www.basketball-reference.com/req/202106291/images/players/"
+    let url2 = url.concat(String(player)).concat(".jpg")
+    console.log(url2)
+    return url2
+}
+
+//render the image
+useEffect( () =>
+{fetch(changeString(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res=> res.json()).then(data => setPlayer(data.player_id))}, [])
+//render the stats
+//useEffect( () => 
+//{fetch(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res => res.json()).then(() => )
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex p-t-10 bg-orange-400 h-56">
-        <div className="flex flex-row p-t-10 pl-64 whitespace-normal">
-          <img className="place-self-end" width="235" height="235" src="https://cdn.nba.com/headshots/nba/latest/1040x760/1630560.png" />
-          <p className="text-white"> _Player_Name_/_Player_Info_ </p>
+    <div className="flex flex-col gap-x-4 gap-y-8">
+      <div className="flex bg-orange-400 justify-center space-between"> 
+        <img className="" src={String(createIDString())}/>
+        <div className="flex flex-col font-sans text-2xl content-center">
+          {playerName}
+          {/* Maybe render more of their item*/}
         </div>
       </div>
 
+
+      <div className="flex justify-center w-full gap-x-8">
+        <span>Search For a Specific Player:</span>
+        <input type="email" />
+        <button className="bg-gray-300">Submit!</button>
+      </div>
+
+      
       <div className="flex content-center px-64">
         <PlayerTabs/>
       </div>
