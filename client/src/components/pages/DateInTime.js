@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useRef } from "react";
 import { Form, Stack, Card } from "react-bootstrap"
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 

@@ -15,21 +15,19 @@ const Performance = ( {name} ) => {
         return concat
     }
 
-    const createIDString  = (id) => {
-        console.log(id)
-        let url = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/1629630.png"
-        let url2 = url.concat(String(id)).concat(".png")
+    const createIDString  = () => {
+        let url = "https://www.basketball-reference.com/req/202106291/images/players/"
+        let url2 = url.concat(String(playerid)).concat(".jpg")
         console.log(url2)
         return url2
 
     }
 
     useEffect( () =>
-    {fetch( changeString(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res=> res.json()).then(data => createIDString(parseInt(data.player_id)))}, [])
+    {fetch( changeString(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res=> res.json()).then(data => setPID(data.player_id))}, [])
 
     return (
     <div className="flex"> 
-    {console.log(playerid)}
         <img width="200" height="200" src={String(createIDString())}/>
         <div className="flex flex-col">
              <span>Points: 5 </span> 

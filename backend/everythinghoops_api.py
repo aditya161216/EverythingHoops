@@ -52,7 +52,7 @@ class EverythingHoopsAPI:
         """
 
         # get player id from name
-        return self.player_ids[self.player_ids["NBAName"] == name]["NBAID"].values[0]
+        return self.player_ids[self.player_ids["NBAName"] == name]["BBRefID"].values[0]
 
     def get_avg_statline(self, name, dates):
         """
@@ -60,7 +60,8 @@ class EverythingHoopsAPI:
         """
 
         # get statline for player
-        statline = self.games_details_df[(self.games_details_df["PLAYER_NAME"] == name)]
+        statline = self.games_details_df[(
+            self.games_details_df["PLAYER_NAME"] == name)]
 
         # get games in date range from games_df
         games = self.games_df[(self.games_df["GAME_DATE_EST"] >= dates[0]) & (
@@ -78,6 +79,7 @@ class EverythingHoopsAPI:
         # return average statline
         return avg_statline
 
+
 def main():
     """
     Main function
@@ -87,10 +89,12 @@ def main():
     hoops_api = EverythingHoopsAPI()
 
     # get average statline
-    avg_statline = hoops_api.get_avg_statline("LeBron James", ["2019-01-01", "2019-12-31"])
+    avg_statline = hoops_api.get_avg_statline(
+        "LeBron James", ["2019-01-01", "2019-12-31"])
 
     # print average statline
     print(avg_statline)
+
 
 if __name__ == "__main__":
     main()

@@ -58,7 +58,7 @@ const Landing = () => {
 
                 <div>
                     <button onClick={e => setVisible(true)}> Press ME!</button>
-                    {visible ? <Performance name={"LeBron James"}/> : null}
+                    {visible ? <Performance name={"Al-Farouq Aminu"}/> : null}
                 </div>
 
             </div>
