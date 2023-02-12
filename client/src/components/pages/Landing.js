@@ -22,23 +22,25 @@ const Landing = () => {
         console.log(url)
         return url
     }
+    
 
-    const findPlayer = async() => {
-        await fetch(date(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then((res => res.json())).then(data => sPlayer(data))
-        console.log(data)
-
+    const initial = async() => {
+        await fetch( date(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then((res => res.json())).then(dataobject => {console.log(dataobject)
+            setData(dataobject)})
     }
 
-    //useEffect( () => {fetch(date()).then(res=> JSON.parse(res.json())).then(data => setData(data))}, []) http://127.0.0.1:8000/boxscore?pts=${points}&reb=${rebounds}&ast=${assists}
+    useEffect( () => initial, []);
+    
+    
 
     const beginQuery = async() => {
         setVisible(false)
-        await fetch(date(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then((res => res.json())).then(dataobject => {
+        await fetch(`http://127.0.0.1:8000/date?date=${year}-${month}-${day}`, {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then((res => res.json())).then(dataobject => {
           console.log(dataobject)
-          setData(dataobject)
+          sPlayer(dataobject)
           setVisible(true)
         })
-      }
+    }
 
 
     //maybe just set background to a color, and then upload an image ontop of it?
@@ -53,10 +55,10 @@ const Landing = () => {
 
                 <span>On this Date, The Best NBA Performance Was:</span>
 
-                <Performance name={findPlayer()}/>
-
+                {data ? <Performance name={data["PLAYER_NAME"]}/>: null}
+            
                 <div>
-                    Input your values below to find the next best players 
+                    Input your values below to find the next best players  *Single digit numbers must start with 0*
                     <div className="flex flex-row">
                         <div className="flex flex-row">
                             <span>Month</span>
@@ -78,6 +80,7 @@ const Landing = () => {
 
                 <div>
                     <button onClick={e => beginQuery()}> Press ME!</button>
+                    {visible ? <Performance name={player["PLAYER_NAME"]}/> : null}
                 </div>
 
             </div>
@@ -86,4 +89,4 @@ const Landing = () => {
 
 }
 
-export default Landing
+export default Landing;
