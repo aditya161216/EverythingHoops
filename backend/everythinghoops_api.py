@@ -155,7 +155,7 @@ class EverythingHoopsAPI:
         last_10_games["HOME_TEAM"] = teams_2
 
         # transpose last 10 games
-        last_10_games = last_10_games.T
+        last_10_games = last_10_games
 
         # return last 10 games
         return last_10_games
