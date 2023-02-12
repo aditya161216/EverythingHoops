@@ -15,14 +15,27 @@ const HomePage = () => {
 
     //quick check for itf the data is undefined/didn't match
 
-    //useEffect( () =>
-    //{fetch('http://127.0.0.1:5000/boxscore').then(res=> console.log(res.json())).then (data => setData(data))}, [])
+    useEffect( () =>
+    {fetch('http://127.0.0.1:5000').then(res=> console.log(res.json())).then (data => setData(data))}, [])
+
+    useEffect( () => {
+      fetch('http://127.0.0.1:5000', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify ({
+          playerName: "Lebron James"
+        }).then(res => {
+          console.log(res.json())
+        }).then(data => console.log(data))
+      })}, [])
 
     //if undefined, 
 
     const beginQuery = () => {
-      fetch('http://127.0.0.1:5000/boxscore').then(res => res.json()).then(data => setData(data))
-      console.log(data)
+      //fetch('http://127.0.0.1:5000/boxscore').then(res => res.json()).then(data => setData(data))
+      //console.log(data)
   
     }    
 
@@ -80,4 +93,3 @@ export default HomePage
 //going to have db, query players points, restful api, player/score , pass in paramter playerid=x, typescore, and take those values
 //and middle tier generates qeury to db, and vega will generate the json compnoent, and then we render it on front end
 
-//
