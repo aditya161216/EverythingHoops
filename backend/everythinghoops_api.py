@@ -5,7 +5,6 @@ API to interact with the EverythingHoops database
 import pickle
 import pandas as pd
 
-
 class EverythingHoopsAPI:
     """
     EverythingHoops API
@@ -114,8 +113,11 @@ class EverythingHoopsAPI:
         # get category progression
         category_progression = games[category].values
 
+        # get dates
+        dates = games["GAME_DATE_EST"].values
+
         # return category progression
-        return category_progression
+        return dates, category_progression
 
     def get_player_last_10_games(self, name):
         """
@@ -163,6 +165,7 @@ class EverythingHoopsAPI:
         # return average per season
         return season_averages
         
+        
 def main():
     """
     Main function
@@ -170,9 +173,6 @@ def main():
 
     # create EverythingHoopsAPI object
     hoops_api = EverythingHoopsAPI()
-
-    # get last 10 games for player
-    print(hoops_api.get_player_avg_per_season("LeBron James"))
 
 if __name__ == "__main__":
     main()
