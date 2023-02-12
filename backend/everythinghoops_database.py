@@ -4,7 +4,7 @@ API to create and query EverythingHoops dataframes
 
 import pandas as pd
 
-class EverythingHoopsAPI:
+class EverythingHoopsDB:
     """
     API to interact with the EverythingHoops database
     """
@@ -20,27 +20,30 @@ class EverythingHoopsAPI:
         self.games_df = pd.DataFrame()
         self.players_df = pd.DataFrame()
 
-    def read_players_csv(self, csv_path):
+    def read_csvs_into_dfs(self):
         """
-        Read in players csv
-        """
-
-        # read in csv
-        df = pd.read_csv(csv_path)
-
-        # concatenate to players_df
-        self.players_df = pd.concat([self.players_df, df])
-
-    def read_boxscore_csv(self, csv_path):
-        """
-        Read in boxscore csv
+        Read all data csvs into dataframes
         """
 
-        # read in csv
-        df = pd.read_csv(csv_path)
+        # read in players csv
+        self.players_df = pd.read_csv("backend/data/players.csv", dtype=str)
 
-        # concatenate to boxscore_df
-        self.boxscore_df = pd.concat([self.boxscore_df, df])
+        # read in player_data csv
+        self.players_data_df = pd.read_csv("backend/data/player_data.csv", dtype=str)
+
+        # read in games_details csv
+        self.games_details_df = pd.read_csv("backend/data/games_details.csv", dtype=str)
+
+        # pts, ast, reb colums to int
+        self.games_details_df["PTS"] = self.games_details_df["PTS"].astype(float)
+        self.games_details_df["AST"] = self.games_details_df["AST"].astype(float)
+        self.games_details_df["REB"] = self.games_details_df["REB"].astype(float)
+
+        # remove comment, nickname, and team_city columns
+        self.games_details_df = self.games_details_df.drop(columns=["COMMENT", "NICKNAME", "TEAM_CITY"])
+
+        # read in games csv
+        self.games_df = pd.read_csv("backend/data/games.csv", dtype=str)
 
     def pickle_data(self):
         """
@@ -50,19 +53,34 @@ class EverythingHoopsAPI:
         # pickle players_df if not empty
         if not self.players_df.empty:
             # pickle players_df
-            self.players_df.to_pickle("/backend/data/players_df.pkl")
+            self.players_df.to_pickle("backend/data/players_df.pkl")
         else:
             # warning message
             print("players_df is empty")
 
-            
-        # pickle boxscore_df if not empty
-        if not self.boxscore_df.empty:
-             # pickle boxscore_df
-            self.boxscore_df.to_pickle("/backend/data/boxscore_df.pkl")
+        # pickle players_data_df if not empty
+        if not self.players_data_df.empty:
+            # pickle players_data_df
+            self.players_data_df.to_pickle("backend/data/players_data_df.pkl")
         else:
             # warning message
-            print("boxscore_df is empty")
+            print("players_data_df is empty")
+
+        # pickle games_details_df if not empty
+        if not self.games_details_df.empty:
+            # pickle games_details_df
+            self.games_details_df.to_pickle("backend/data/games_details_df.pkl")
+        else:
+            # warning message
+            print("games_details_df is empty")
+            
+        # pickle games_df if not empty
+        if not self.games_df.empty:
+            # pickle games_df
+            self.games_df.to_pickle("backend/data/games_df.pkl")
+        else:
+            # warning message
+            print("games_df is empty")
 
 def main():
     """
@@ -70,17 +88,10 @@ def main():
     """
 
     # create EverythingHoopsAPI object
-    hoops = EverythingHoopsAPI()
+    hoops = EverythingHoopsDB()
 
-    # read in players csv
-    # hoops.read_players_csv("data/players.csv")
-
-    # read in boxscore csv
-    # hoops.read_boxscore_csv("data/boxscore.csv")
-
-    # SAMPLE DATA
-    # read in jokic csv
-    hoops.read_boxscore_csv("/backend/data/jokic.csv")
+    # read in csvs into dataframes
+    hoops.read_csvs_into_dfs()
 
     # pickle data
     hoops.pickle_data()
