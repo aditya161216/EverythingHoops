@@ -173,6 +173,13 @@ class EverythingHoopsAPI:
         # transpose last 10 games
         last_10_games = last_10_games
 
+        # set null values to 0 if column is float or "None" if column is string
+        for col in last_10_games.columns:
+            if last_10_games[col].dtype == float:
+                last_10_games[col] = last_10_games[col].fillna(0)
+            elif last_10_games[col].dtype == str:
+                last_10_games[col] = last_10_games[col].fillna("None")
+
         # return last 10 games
         return last_10_games
 
