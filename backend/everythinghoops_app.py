@@ -22,17 +22,22 @@ def home():
     return "Welcome to EverythingHoops!"
 
 
-@app.route("/boxscore")
+@app.route("/boxscore", methods=['GET'])
 def boxscore():
     """
     Boxscore page
     """
 
+    # request pts, reb, ast
+    pts = int(request.args.to_dict()['pts'])
+    reb = int(request.args.to_dict()['reb'])
+    ast = int(request.args.to_dict()['ast'])
+
     # get statline
-    statline = hoops_api.get_statline(70, 0, 0)
+    statline = hoops_api.get_statline(pts, ast, reb)
 
     # return jsonified statline
-    response = jsonify(statline.to_dict(orient="records"))
+    response = jsonify(statline)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 

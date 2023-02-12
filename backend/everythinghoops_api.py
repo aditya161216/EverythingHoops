@@ -43,7 +43,7 @@ class EverythingHoopsAPI:
                 statline[col] = statline[col].fillna("")
 
         # return statline
-        return statline
+        return statline.to_dict(orient="records")[0]
 
     def get_id_from_name(self, name):
         """
