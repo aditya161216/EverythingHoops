@@ -3,7 +3,6 @@ import 'react-tabs/style/react-tabs.css';
 import PlayerTabs from "./playerTabs.js";
 import { useEffect , useState} from "react";
 
-
 // options with default values
 const options = {
   defaultTabId: 'settings',
@@ -20,6 +19,7 @@ const PlayerPage = ({playerName}) => {
 
   const [player, setPlayer] = useState(null);
   const [games, setGames] = useState([]);
+  const [visible, setvisible] = useState(false);
 
   const renderUrl = () => {
     let number = playerName.replaceAll(" ", "%20");
@@ -42,12 +42,16 @@ const createIDString  = () => {
     return url2
 }
 
+
 //render the image
 useEffect( () =>
 {fetch(changeString(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res=> res.json()).then(data => setPlayer(data.player_id))}, [])
 //render the stats
 useEffect( () =>
-{fetch("http://127.0.0.1:8000/player/last10games?player_name=" + renderUrl(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res=> res.json()).then(data => setGames(data))}, [])
+{fetch("http://127.0.0.1:8000/player/last10games?player_name=" + renderUrl(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res=> res.json()).then(data => {
+  setGames(data)
+  setvisible(true)
+})}, [])
 
 //
 
@@ -56,31 +60,33 @@ useEffect( () =>
     <div className="flex flex-col gap-x-4 gap-y-8">
       <div className="flex bg-orange-400 justify-center space-between"> 
         <img className="" src={String(createIDString())}/>
-        <div className="flex flex-col font-sans text-2xl content-center">
+        <div className="flex flex-col font-sans text-6xl font-bold content-center">
           {playerName}
           {/* Maybe render more of their item*/}
         </div>
       </div>
 
       <div className="flex justify-center w-full gap-x-8">
-        <span>Search For a Specific Player:</span>
+        <span>Search For an NBA Player:</span>
         <input type="email" />
         <button className="bg-gray-300">Submit!</button>
       </div>
 
-      <div className="flex content-center px-64">
-        <PlayerTabs/>
+      <div className="flex flex-col item-center content-center px-64">
+        {visible ? <PlayerTabs games = {games}/> : null}
       </div>
 
       <div>
-        <ul>
-          {games.map(e =>
-          <li> {JSON.stringify(e)}</li>)}
-        </ul>
+        {/* <ul>
+           {games.map(e =>
+          <tr> {JSON.stringify(e)}</tr>)}
+        </ul> */}
       </div>
 
     </div>
   )
 }
+
+
 
 export default PlayerPage;
