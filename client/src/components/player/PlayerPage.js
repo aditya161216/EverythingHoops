@@ -1,6 +1,6 @@
 import React from "react";
 import 'react-tabs/style/react-tabs.css';
-import PlayerTabs from "./PlayerTabs.js";
+import PlayerTabs from "./playerTabs.js";
 
 
 // options with default values

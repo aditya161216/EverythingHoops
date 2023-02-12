@@ -5,6 +5,7 @@ import Header from "./components/Links";
 import Datepage from "./components/pages/DateInTime";
 import './App.css';
 import Landing from "./components/pages/Landing";
+import PlayerPage from  "./components/player/PlayerPage"
 
 function App() {
   return (
