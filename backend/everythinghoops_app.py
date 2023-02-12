@@ -138,7 +138,7 @@ def date():
     games = hoops_api.get_best_performance_on_day(date)
 
     # return jsonified games
-    response = jsonify(games.to_dict(orient="records"))
+    response = jsonify(games)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 

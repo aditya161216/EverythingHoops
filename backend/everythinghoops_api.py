@@ -96,6 +96,9 @@ class EverythingHoopsAPI:
         # get best performance
         best_performance = statline[statline["GAME_SCORE"] == statline["GAME_SCORE"].max()]
 
+        # convert best performance to dict
+        best_performance = best_performance.to_dict(orient="records")[0]
+
         # return best performance
         return best_performance
 
@@ -191,11 +194,11 @@ def main():
     # create EverythingHoopsAPI object
     hoops_api = EverythingHoopsAPI()
 
-    # get last 10 games for player
-    last_10_games = hoops_api.get_player_last_10_games("LeBron James")
+    # get best performance on day
+    best_performance = hoops_api.get_best_performance_on_day("2020-12-23")
 
     # print last 10 games
-    print(last_10_games)
+    print(best_performance)
 
 if __name__ == "__main__":
     main()
