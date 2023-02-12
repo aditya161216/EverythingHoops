@@ -44,7 +44,16 @@ class EverythingHoopsAPI:
                 statline[col] = statline[col].fillna("")
 
         # return statline
-        return statline.to_dict(orient="records")[0]
+        statline = statline.to_dict(orient="records")
+
+        # get length of statline
+        num_statline = len(statline)
+
+        # select random statline
+        statline = statline[rnd.randint(0, num_statline - 1)]
+
+        # return statline
+        return statline
 
     def get_id_from_name(self, name):
         """
