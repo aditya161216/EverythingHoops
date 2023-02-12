@@ -1,4 +1,5 @@
 Flask==2.2.2
+Flask-CORS==3.0.10
 pandas>=0.19
 gunicorn==20.1.0
 itsdangerous>=2.0
