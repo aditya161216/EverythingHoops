@@ -149,16 +149,21 @@ def stats():
     Stats page
     """
 
-    # # request stats
-    # stats = request.args.to_dict()['stats']
+    # request player_name, min_date, max_date
+    player_name = request.args.to_dict()['player_name']
+    min_date = request.args.to_dict()['min_date']
+    max_date = request.args.to_dict()['max_date']
 
-    # # get games from stats
-    # games = hoops_api.get_avg_statline(stats)
+    # dates is tuple of (min_date, max_date)
+    dates = (min_date, max_date)
 
-    # # return jsonified games
-    # response = jsonify(games.to_dict(orient="records"))
-    # response.headers.add('Access-Control-Allow-Origin', '*')
-    # return response
+    # get games from stats
+    games = hoops_api.get_avg_statline(player_name, dates)
+
+    # return jsonified games
+    response = jsonify(games.to_dict(orient="records"))
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)

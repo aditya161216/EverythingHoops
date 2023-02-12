@@ -134,6 +134,23 @@ class EverythingHoopsAPI:
         # reorder from oldest to newest
         last_10_games = last_10_games.sort_values(by="GAME_DATE_EST", ascending=False)
 
+        # list of game ids for last 10 games
+        game_ids = last_10_games["GAME_ID"].values
+
+        # get teams given game ids
+        teams = self.games_details_df[self.games_details_df["GAME_ID"].isin(game_ids)][["GAME_ID", "TEAM_ABBREVIATION"]]
+
+        # get team abbreviations for last 10 games of player
+        teams = teams.groupby("GAME_ID")["TEAM_ABBREVIATION"].unique().to_numpy()
+
+        # convert to list
+        teams_1 = [team[0] for team in teams]
+        teams_2 = [team[1] for team in teams]
+
+        # add teams as columns to last 10 games
+        last_10_games["AWAY_TEAM"] = teams_1
+        last_10_games["HOME_TEAM"] = teams_2
+
         # return last 10 games
         return last_10_games
 
@@ -173,6 +190,12 @@ def main():
 
     # create EverythingHoopsAPI object
     hoops_api = EverythingHoopsAPI()
+
+    # get last 10 games for player
+    last_10_games = hoops_api.get_player_last_10_games("LeBron James")
+
+    # print last 10 games
+    print(last_10_games)
 
 if __name__ == "__main__":
     main()
