@@ -33,23 +33,15 @@ def boxscore():
     # return jsonified statline
     return jsonify(statline.to_dict(orient="records"))
 
-<<<<<<< HEAD
 
-@app.route("/player")
-=======
-@app.route("/player", methods = ['POST'])
->>>>>>> f2d72b1210aeb2efad73a60c3778348aa4289fa5
+@app.route("/player", methods=['POST'])
 def player():
     """
     Player page
     """
 
     # request player name
-<<<<<<< HEAD
-    # player_name = request.args.get("name")
-=======
     player_name = request.get_json()['player_name']
->>>>>>> f2d72b1210aeb2efad73a60c3778348aa4289fa5
 
     # get player id from name
     player_id = hoops_api.get_id_from_name("Lebron James")
