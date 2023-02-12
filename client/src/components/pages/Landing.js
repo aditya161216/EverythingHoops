@@ -21,13 +21,6 @@ const Landing = () => {
         return today
     }
 
-    const setPlayer = () => {
-        console.log("this button was pressed!")
-        return (
-            <Performance/>
-        )
-    }
-
     //maybe just set background to a color, and then upload an image ontop of it?
     //on submit we convert it to a specific type of date, and then pass it into as a prop?
 

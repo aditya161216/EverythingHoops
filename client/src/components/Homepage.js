@@ -11,25 +11,30 @@ const HomePage = () => {
     const [assists, setAssists] = useState(0);
 
     const nbateams = [];
+    const [data, setData] = useState([{}])
 
-    useEffect( () =>{fetch('http://127.0.0.1:5000/boxscore').then(res=> console.log(res.json())).then (data => console.log(data))}, [])
+    //quick check for itf the data is undefined/didn't match
 
+    useEffect( () =>
+    {fetch('http://127.0.0.1:8000/boxscore').then(res=> console.log(res.json())).then (data => setData(data))}, [])
 
+    //spaces url encode them
+    useEffect( () =>
+    {fetch('http://127.0.0.1:8000/player?player_name=LeBron%20James&height=90', {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res=> console.log(res.json())).then(data => console.log(data))}, [])
 
-    const beginQuery = async() => {
+    //if undefined, 
 
-    }
-
-    //PRA, also options to select in certain date ranges, against a certain team, if these stats have occured, these are optional,
-    //certain team -> placeHolder -> all
-    //certain date -> placeHolder -> range
-    
+    const beginQuery = () => {
+      //fetch('http://127.0.0.1:5000/boxscore').then(res => res.json()).then(data => setData(data))
+      //console.log(data)
+  
+    }    
 
     return (
           <div className="flex flex-col h-screen w-screen">
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="flex flex-row font-sans text-2xl font-bold">
-                Input a specific Totals for Points, Rebonds, and Assists, to see if this statline has been achieved before!
+                Input a specific Totals for Points, Rebonds, and Assists, to see if this statline has been achieved before! {console.log(data)}
               </div>
 
               <div className="flex flex-row gap-x-16 font-sans">
@@ -63,7 +68,7 @@ const HomePage = () => {
                   {/* TODO: create the drop down for this */}
               </div>
 
-              <button onClick={beginQuery}>Submit!</button>
+              <button onClick={ () => beginQuery()}>Submit!</button>
           </div>
         </div>
       </div>
@@ -79,4 +84,3 @@ export default HomePage
 //going to have db, query players points, restful api, player/score , pass in paramter playerid=x, typescore, and take those values
 //and middle tier generates qeury to db, and vega will generate the json compnoent, and then we render it on front end
 
-//
