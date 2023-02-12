@@ -187,6 +187,23 @@ class EverythingHoopsAPI:
 
         # return average per season
         return season_averages
+
+    def get_statline_on_day(self, name, date):
+        """
+        Get player points, assists, and rebounds for a given date
+        """
+
+        # get player games
+        games = self.games_details_df[self.games_details_df["PLAYER_NAME"] == name]
+
+        # get games on date
+        games = games[games["GAME_DATE_EST"] == date]
+
+        # get points, assists, and rebounds
+        statline = games[["PTS", "AST", "REB"]]
+
+        # return points, assists, and rebounds
+        return statline.to_dict(orient="records")[0]
         
         
 def main():

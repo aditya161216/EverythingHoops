@@ -148,6 +148,25 @@ def date():
     return response
 
 
+@app.route("/date/statline", methods=['GET'])
+def date_statline():
+    """
+    Date statline page
+    """
+
+    # request name, date
+    player_name = request.args.to_dict()['player_name']
+    date = request.args.to_dict()['date']
+
+    # get games from date
+    games = hoops_api.get_statline_on_day(player_name, date)
+
+    # return jsonified games
+    response = jsonify(games)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
 @app.route("/statistics", methods=['GET'])
 def stats():
     """
