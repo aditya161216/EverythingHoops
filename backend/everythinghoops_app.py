@@ -68,7 +68,7 @@ def player_last_10_games():
     last_10_games = hoops_api.get_player_last_10_games(player_name)
 
     # return jsonified last 10 games
-    response = jsonify(last_10_games.to_dict(orient="records"))
+    response = jsonify(last_10_games.to_dict())
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
@@ -106,6 +106,59 @@ def player_season_avg():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
+
+@app.route("/player/progression", methods=['GET'])
+def player_progression():
+    """
+    Player progression page
+    """
+
+    # request player name
+    player_name = request.args.to_dict()['player_name']
+
+    # get player progression
+    dates, category_progression = hoops_api.get_player_progression(player_name)
+
+    # return jsonified progression
+    response = jsonify({"dates": dates, "category_progression": category_progression})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
+@app.route("/date", methods=['GET'])
+def date():
+    """
+    Date page
+    """
+
+    # request date
+    date = request.args.to_dict()['date']
+
+    # get games from date
+    games = hoops_api.get_best_performance_on_day(date)
+
+    # return jsonified games
+    response = jsonify(games.to_dict(orient="records"))
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
+@app.route("/statistics", methods=['GET'])
+def stats():
+    """
+    Stats page
+    """
+
+    # # request stats
+    # stats = request.args.to_dict()['stats']
+
+    # # get games from stats
+    # games = hoops_api.get_avg_statline(stats)
+
+    # # return jsonified games
+    # response = jsonify(games.to_dict(orient="records"))
+    # response.headers.add('Access-Control-Allow-Origin', '*')
+    # return response
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
