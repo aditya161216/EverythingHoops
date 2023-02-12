@@ -33,7 +33,7 @@ const Landing = () => {
 
                 <span>On this Date, The Best NBA Performance Was:</span>
 
-                <Performance/>
+                <Performance name={"LeBron James"}/>
 
                 <div>
                     Input your values below to find the next best players 
@@ -58,7 +58,7 @@ const Landing = () => {
 
                 <div>
                     <button onClick={e => setVisible(true)}> Press ME!</button>
-                    {visible ? <Performance/> : null}
+                    {visible ? <Performance name={"LeBron James"}/> : null}
                 </div>
 
             </div>
