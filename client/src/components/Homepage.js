@@ -16,20 +16,11 @@ const HomePage = () => {
     //quick check for itf the data is undefined/didn't match
 
     useEffect( () =>
-    {fetch('http://127.0.0.1:5000').then(res=> console.log(res.json())).then (data => setData(data))}, [])
+    {fetch('http://127.0.0.1:8000/boxscore').then(res=> console.log(res.json())).then (data => setData(data))}, [])
 
-    useEffect( () => {
-      fetch('http://127.0.0.1:5000', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify ({
-          playerName: "Lebron James"
-        }).then(res => {
-          console.log(res.json())
-        }).then(data => console.log(data))
-      }), [])
+    //spaces url encode them
+    useEffect( () =>
+    {fetch('http://127.0.0.1:8000/player?player_name=LeBron%20James&height=90', {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res=> console.log(res.json())).then(data => console.log(data))}, [])
 
     //if undefined, 
 
@@ -43,7 +34,7 @@ const HomePage = () => {
           <div className="flex flex-col h-screen w-screen">
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="flex flex-row font-sans text-2xl font-bold">
-                Input a specific Totals for Points, Rebonds, and Assists, to see if this statline has been achieved before!
+                Input a specific Totals for Points, Rebonds, and Assists, to see if this statline has been achieved before! {console.log(data)}
               </div>
 
               <div className="flex flex-row gap-x-16 font-sans">
