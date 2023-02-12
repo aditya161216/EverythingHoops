@@ -68,7 +68,7 @@ def player_last_10_games():
     last_10_games = hoops_api.get_player_last_10_games(player_name)
 
     # return jsonified last 10 games
-    response = jsonify(last_10_games.to_dict())
+    response = jsonify(last_10_games.to_dict(orient="records"))
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
