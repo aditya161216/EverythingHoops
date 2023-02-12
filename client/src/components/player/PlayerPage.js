@@ -19,6 +19,12 @@ const PlayerPage = ({playerName}) => {
   //search for full name:
 
   const [player, setPlayer] = useState(null);
+  const [games, setGames] = useState([]);
+
+  const renderUrl = () => {
+    let number = playerName.replaceAll(" ", "%20");
+    return number
+  }
 
   const changeString = () => {
     let number = playerName.replaceAll(" ", "%20");
@@ -40,8 +46,11 @@ const createIDString  = () => {
 useEffect( () =>
 {fetch(changeString(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res=> res.json()).then(data => setPlayer(data.player_id))}, [])
 //render the stats
-//useEffect( () => 
-//{fetch(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res => res.json()).then(() => )
+useEffect( () =>
+{fetch("http://127.0.0.1:8000/player/last10games?player_name=" + renderUrl(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res=> res.json()).then(data => setGames(data))}, [])
+
+//
+
 
   return (
     <div className="flex flex-col gap-x-4 gap-y-8">
@@ -53,16 +62,21 @@ useEffect( () =>
         </div>
       </div>
 
-
       <div className="flex justify-center w-full gap-x-8">
         <span>Search For a Specific Player:</span>
         <input type="email" />
         <button className="bg-gray-300">Submit!</button>
       </div>
 
-      
       <div className="flex content-center px-64">
         <PlayerTabs/>
+      </div>
+
+      <div>
+        <ul>
+          {games.map(e =>
+          <li> {JSON.stringify(e)}</li>)}
+        </ul>
       </div>
 
     </div>
