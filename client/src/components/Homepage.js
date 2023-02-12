@@ -11,19 +11,20 @@ const HomePage = () => {
     const [assists, setAssists] = useState(0);
 
     const nbateams = [];
+    const [data, setData] = useState([{}])
 
-    useEffect( () =>{fetch('http://127.0.0.1:5000/boxscore').then(res=> console.log(res.json())).then (data => console.log(data))}, [])
+    //quick check for itf the data is undefined/didn't match
 
+    //useEffect( () =>
+    //{fetch('http://127.0.0.1:5000/boxscore').then(res=> console.log(res.json())).then (data => setData(data))}, [])
 
+    //if undefined, 
 
-    const beginQuery = async() => {
-
-    }
-
-    //PRA, also options to select in certain date ranges, against a certain team, if these stats have occured, these are optional,
-    //certain team -> placeHolder -> all
-    //certain date -> placeHolder -> range
-    
+    const beginQuery = () => {
+      fetch('http://127.0.0.1:5000/boxscore').then(res => res.json()).then(data => setData(data))
+      console.log(data)
+  
+    }    
 
     return (
           <div className="flex flex-col h-screen w-screen">
@@ -63,7 +64,7 @@ const HomePage = () => {
                   {/* TODO: create the drop down for this */}
               </div>
 
-              <button onClick={beginQuery}>Submit!</button>
+              <button onClick={ () => beginQuery()}>Submit!</button>
           </div>
         </div>
       </div>
