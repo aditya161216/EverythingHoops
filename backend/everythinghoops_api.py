@@ -20,6 +20,7 @@ class EverythingHoopsAPI:
         self.players_data_df = pickle.load(open("backend/data/players_data_df.pkl", "rb"))
         self.games_details_df = pickle.load(open("backend/data/games_details_df.pkl", "rb"))
         self.games_df = pickle.load(open("backend/data/games_df.pkl", "rb"))
+        self.player_ids = pickle.load(open("backend/data/player_ids.pkl", "rb"))
 
     def get_statline(self, pts, ast, reb) -> pd.DataFrame:
         """
@@ -38,3 +39,12 @@ class EverythingHoopsAPI:
 
         # return statline
         return statline
+
+    def get_id_from_name(self, name):
+        """
+        Get player id from name
+        """
+
+        # get player id from name
+        return self.player_ids[self.player_ids["NBAName"] == name]["NBAID"].values[0]
+        
