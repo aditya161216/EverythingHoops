@@ -7,9 +7,8 @@ const Landing = () => {
     const [year, setYear] = useState(2000);
 
     const [visible, setVisible] = useState(false);
-
-
-
+    const [data, setData] = useState(null);
+    const [player, sPlayer] = useState(null)
 
     
     const date = () => {
@@ -17,9 +16,30 @@ const Landing = () => {
         const day = String(today.getDate()).padStart(2, '0')
         const month = String(today.getMonth() + 1).padStart(2, '0');
 
-        today = month + "/" + day;
-        return today
+        today = 2020 + "-" + month + "-" + day;
+        today = String(today);
+        let url = 'http://127.0.0.1:8000/date?date='.concat(today)
+        console.log(url)
+        return url
     }
+
+    const findPlayer = async() => {
+        await fetch(date(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then((res => res.json())).then(data => sPlayer(data))
+        console.log(data)
+
+    }
+
+    //useEffect( () => {fetch(date()).then(res=> JSON.parse(res.json())).then(data => setData(data))}, []) http://127.0.0.1:8000/boxscore?pts=${points}&reb=${rebounds}&ast=${assists}
+
+    const beginQuery = async() => {
+        setVisible(false)
+        await fetch(date(), {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then((res => res.json())).then(dataobject => {
+          console.log(dataobject)
+          setData(dataobject)
+          setVisible(true)
+        })
+      }
+
 
     //maybe just set background to a color, and then upload an image ontop of it?
     //on submit we convert it to a specific type of date, and then pass it into as a prop?
@@ -29,11 +49,11 @@ const Landing = () => {
     return (
         <div className="flex">
             <div className="flex flex-col">
-                <span> Welcome! Todays Date is: {date()}</span>
+                <span> Welcome! Todays Date is: 2/12</span>
 
                 <span>On this Date, The Best NBA Performance Was:</span>
 
-                <Performance name={"LeBron James"}/>
+                <Performance name={findPlayer()}/>
 
                 <div>
                     Input your values below to find the next best players 
@@ -57,8 +77,7 @@ const Landing = () => {
                 </div>
 
                 <div>
-                    <button onClick={e => setVisible(true)}> Press ME!</button>
-                    {visible ? <Performance name={"Al-Farouq Aminu"}/> : null}
+                    <button onClick={e => beginQuery()}> Press ME!</button>
                 </div>
 
             </div>

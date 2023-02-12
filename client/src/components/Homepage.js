@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Performance from "./performance";
 
 const HomePage = () => {
   //Points Rebounds, and Assists are set to 0/1, but if updated it w
@@ -10,25 +10,18 @@ const HomePage = () => {
     const [rebounds, setRebounds] = useState(0);
     const [assists, setAssists] = useState(0);
 
-    const nbateams = [];
-    const [data, setData] = useState([{}])
+    const [data, setData] = useState(null)
+    const [visible, setVisible] = useState(false);
 
-    //quick check for itf the data is undefined/didn't match
+    const beginQuery = async() => {
 
-    useEffect( () =>
-    {fetch('http://127.0.0.1:8000/boxscore').then(res=> console.log(res.json())).then (data => setData(data))}, [])
-
-    //spaces url encode them
-    useEffect( () =>
-    {fetch('http://127.0.0.1:8000/player?player_name=LeBron%20James&height=90', {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then(res=> console.log(res.json())).then(data => console.log(data))}, [])
-
-    //if undefined, 
-
-    const beginQuery = () => {
-      //fetch('http://127.0.0.1:5000/boxscore').then(res => res.json()).then(data => setData(data))
-      //console.log(data)
-  
-    }    
+      setVisible(false)
+      await fetch(`http://127.0.0.1:8000/boxscore?pts=${points}&reb=${rebounds}&ast=${assists}`, {mode: 'cors', headers: {'Access-Control-Allow-Origin': '*'}}).then((res => res.json())).then(dataobject => {
+        console.log(dataobject)
+        setData(dataobject)
+        setVisible(true)
+      })
+    }
 
     return (
           <div className="flex flex-col h-screen w-screen">
@@ -63,12 +56,9 @@ const HomePage = () => {
                   {console.log(dates)}
                 </div>  
 
-                <div className="flex">
-                  Select for if you want this performance against a certain Team
-                  {/* TODO: create the drop down for this */}
-              </div>
 
               <button onClick={ () => beginQuery()}>Submit!</button>
+              {visible ? <Performance name={data["PLAYER_NAME"]}/> : null}
           </div>
         </div>
       </div>

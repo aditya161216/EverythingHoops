@@ -12,15 +12,15 @@ const Header = () => {
 
                 <ul className="flex items-center space-x-8">
                     <li> 
-                        <a href="/"> Date_in_Time</a>
+                        <a href="/">HomePage</a>
                     </li>
 
                     <li> 
-                        <a href="/players/:playerId/Stats"> Stats</a>
+                        <a href="/players/1"> Player_Stats</a>
                     </li>
 
                     <li> 
-                        <a href="#"> Player_Profile</a>
+                        <a href="/landing"> Date_in_Time</a>
                     </li>
                 </ul>
             </div>
