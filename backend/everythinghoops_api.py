@@ -4,6 +4,7 @@ API to interact with the EverythingHoops database
 
 import pickle
 import pandas as pd
+import random as rnd
 
 class EverythingHoopsAPI:
     """
@@ -43,7 +44,16 @@ class EverythingHoopsAPI:
                 statline[col] = statline[col].fillna("")
 
         # return statline
-        return statline.to_dict(orient="records")[0]
+        statline = statline.to_dict(orient="records")
+
+        # get length of statline
+        num_statline = len(statline)
+
+        # select random statline
+        statline = statline[rnd.randint(0, num_statline - 1)]
+
+        # return statline
+        return statline
 
     def get_id_from_name(self, name):
         """
@@ -97,7 +107,13 @@ class EverythingHoopsAPI:
         best_performance = statline[statline["GAME_SCORE"] == statline["GAME_SCORE"].max()]
 
         # convert best performance to dict
-        best_performance = best_performance.to_dict(orient="records")[0]
+        best_performance = best_performance.to_dict(orient="records")
+
+        # get length of best performance
+        num_best = len(best_performance)
+
+        # select random best performance
+        best_performance = best_performance[rnd.randint(0, num_best - 1)]
 
         # return best performance
         return best_performance
