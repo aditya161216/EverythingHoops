@@ -38,13 +38,25 @@ class EverythingHoopsDB:
         self.games_details_df = pd.read_csv(
             "backend/data/games_details.csv", dtype=str)
 
-        # pts, ast, reb colums to int
+        # pts, ast, reb, fg_pct, 3p_pct, ft_pct, steals, blocks, tov colums to float
         self.games_details_df["PTS"] = self.games_details_df["PTS"].astype(
             float)
         self.games_details_df["AST"] = self.games_details_df["AST"].astype(
             float)
         self.games_details_df["REB"] = self.games_details_df["REB"].astype(
             float)
+        self.games_details_df["FG_PCT"] = self.games_details_df["FG_PCT"].astype(
+            float)
+        self.games_details_df["FG3_PCT"] = self.games_details_df["FG3_PCT"].astype(
+            float)
+        self.games_details_df["FT_PCT"] = self.games_details_df["FT_PCT"].astype(
+            float)
+        self.games_details_df["STL"] = self.games_details_df["STL"].astype(
+            float)
+        self.games_details_df["BLK"] = self.games_details_df["BLK"].astype(
+            float)
+        self.games_details_df["TO"] = self.games_details_df["TO"].astype(
+            float)    
 
         # remove comment, nickname, and team_city columns
         self.games_details_df = self.games_details_df.drop(
