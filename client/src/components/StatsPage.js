@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useRef } from "react";
-import { Form, Stack, Card } from "react-bootstrap"
-import Dropdown from 'react-dropdown';
+import { Form} from "react-bootstrap"
 import 'react-dropdown/style.css';
 
 const StatsPage = () => {
