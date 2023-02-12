@@ -138,7 +138,6 @@ const RadarChartPanel = () => {
             value: "Average NBA_position"
         }
     ];
-
     let min_date = "2003-10-05"
     return (
         <div className='flex flex-col w-full justify-content-center'>
@@ -165,16 +164,16 @@ const RadarChartPanel = () => {
                         Add
                     </Button>
                 </div>
-
                 <div className='flex-col'>
                     <label for="start">Start date: </label>
-                    <input type="date"
-                        id="start"/>
+                    <input type="date" id="start" name="trip-start"
+                        value="2003-10-05"
+                        min="2003-10-05" max="2022-12-22" />
                 </div>
 
                 <div className='flex-col'>
-                    <label for="start">End date:   </label>
-                    <input type="date" id="start" name="trip-start" />
+                    <label for="start">End date: </label>
+                    <input type="date" id="start" name="trip-start" value="2022-12-22" min="2003-10-05" max="2022-12-22" />
                 </div>
 
 
