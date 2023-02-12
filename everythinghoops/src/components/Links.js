@@ -7,18 +7,15 @@ const Header = () => {
 
     return (
         <div>
-            <div className="flex mx-96">
-                <div className=""> 
-                    Everything Hoops
-                </div>
+            <div className="flex mx-64 ">
+                
 
                 <ul className="flex items-center space-x-8">
+                    <div className="font-thicker text-xl"> 
+                    <a href="/"> Everything Hoops</a>
+                    </div>
                     <li> 
-                        <a href="/"> home_temp</a>
-                    </li>
-
-                    <li> 
-                        <a href="/players/:playerId/Stats"> Players_temp</a>
+                        <a href="/players/:playerId"> Players_temp</a>
                     </li>
 
                     <li> 

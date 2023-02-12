@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: Thicker;
+    src: url("D:\Hackbeanpot\EverythingHoops\everythinghoops\public\fonts\thicker-font-family\KickerTrial-Black.ttf")
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
