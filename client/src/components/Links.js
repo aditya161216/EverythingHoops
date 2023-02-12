@@ -2,8 +2,6 @@ import React from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 
 const Header = () => {
-    //quick header to display all the links for the other site whenever we render a page.
-    const Links = ["Players, Teams, Stats"]
 
     return (
         <div>
@@ -14,15 +12,15 @@ const Header = () => {
 
                 <ul className="flex items-center space-x-8">
                     <li> 
-                        <a href="/"> home_temp</a>
+                        <a href="/"> Date_in_Time</a>
                     </li>
 
                     <li> 
-                        <a href="/players/:playerId/Stats"> Players_temp</a>
+                        <a href="/players/:playerId/Stats"> Stats</a>
                     </li>
 
                     <li> 
-                        <a href="#"> Test 3</a>
+                        <a href="#"> Player_Profile</a>
                     </li>
                 </ul>
             </div>

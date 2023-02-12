@@ -3,9 +3,7 @@ import HomePage from './components/Homepage';
 import StatsPage from './components/StatsPage';
 import Header from "./components/Links";
 import Datepage from "./components/pages/DateInTime";
-import PlayerStats from "./components/player/PlayerStats";
 import './App.css';
-import PlayerGraphs from "./components/player/PlayerGraphs";
 import Landing from "./components/pages/Landing";
 
 function App() {
@@ -18,8 +16,7 @@ function App() {
           <Route path="/players" element={<p> I want this to be the url where you search for players</p>}/>
           <Route path="/date" element={<Datepage/>}/>
           <Route path="/performance" element={<StatsPage/>}/>
-          <Route path= "/players/:playerId/Stats" element={<PlayerStats/>}/>
-          <Route path= "/players/:playerId/Graphs" element={<PlayerGraphs/>}/>
+          <Route path= "/players/:playerId" element={<PlayerPage/>}/>
           <Route path= "/landing" element={<Landing/>}/>
         </Routes>
       </Router>
