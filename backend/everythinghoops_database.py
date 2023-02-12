@@ -19,6 +19,7 @@ class EverythingHoopsDB:
         self.games_details_df = pd.DataFrame()
         self.games_df = pd.DataFrame()
         self.players_df = pd.DataFrame()
+        self.player_ids = pd.DataFrame
 
     def read_csvs_into_dfs(self):
         """
@@ -44,6 +45,14 @@ class EverythingHoopsDB:
 
         # read in games csv
         self.games_df = pd.read_csv("backend/data/games.csv", dtype=str)
+
+    def read_player_ids(self):
+        """
+        Read player_ids
+        """
+
+        self.player_ids = pd.read_csv("backend/data/Nba player ids.csv", dtype=str)
+        
 
     def pickle_data(self):
         """
@@ -91,10 +100,17 @@ def main():
     hoops = EverythingHoopsDB()
 
     # read in csvs into dataframes
-    hoops.read_csvs_into_dfs()
+    # hoops.read_csvs_into_dfs()
+
+    # read in player_ids
+    hoops.read_player_ids()
+
+    # pickle player_ids
+    hoops.player_ids.to_pickle("backend/data/player_ids.pkl")
+
 
     # pickle data
-    hoops.pickle_data()
+    # hoops.pickle_data()
 
 if __name__ == "__main__":
     main()
