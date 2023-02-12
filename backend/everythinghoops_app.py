@@ -32,7 +32,9 @@ def boxscore():
     statline = hoops_api.get_statline(70, 0, 0)
 
     # return jsonified statline
-    return jsonify(statline.to_dict(orient="records"))
+    response = jsonify(statline.to_dict(orient="records"))
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
 @app.route("/player", methods=['GET'])
@@ -43,13 +45,28 @@ def player():
     # request player name
     player_name = request.args.to_dict()['player_name']
 
-    print(request.args.to_dict()['player_name'])
-
     # get player id from name
     player_id = hoops_api.get_id_from_name(player_name)
 
     # # return player id
     response = jsonify({'player_id': player_id})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
+@app.route("/player/last10games", methods=['GET'])
+def player_last_10_games():
+    """
+    Player last 10 games page
+    """
+    # request player name
+    player_name = request.args.to_dict()['player_name']
+
+    # get player last 10 games
+    last_10_games = hoops_api.get_player_last_10_games(player_name)
+
+    # return jsonified last 10 games
+    response = jsonify(last_10_games.to_dict(orient="records"))
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 

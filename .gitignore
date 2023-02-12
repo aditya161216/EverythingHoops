@@ -337,6 +337,7 @@ sketch
 # and uncomment the following lines
 # .pnp.*
 
+# pickles
 *.pkl
 **/*.pkl
 

@@ -79,7 +79,90 @@ class EverythingHoopsAPI:
         # return average statline
         return avg_statline
 
+    def get_best_performance_on_day(self, date):
+        """
+        Get best performance on a day
+        """
 
+        # get games on day
+        games = self.games_df[self.games_df["GAME_DATE_EST"] == date]
+
+        # get game ids
+        game_ids = games["GAME_ID"].values
+
+        # get statline for games on day
+        statline = self.games_details_df[self.games_details_df["GAME_ID"].isin(
+            game_ids)]
+
+        # get best performance
+        best_performance = statline[statline["GAME_SCORE"] == statline["GAME_SCORE"].max()]
+
+        # return best performance
+        return best_performance
+
+    def player_progression(self, name, category):
+        """
+        Get player progression based on category
+        """
+
+        # get games for player
+        games = self.games_details_df[self.games_details_df["PLAYER_NAME"] == name]
+
+        # sort by 
+        games = games.sort_values(by="GAME_DATE_EST")
+
+        # get category progression
+        category_progression = games[category].values
+
+        # return category progression
+        return category_progression
+
+    def get_player_last_10_games(self, name):
+        """
+        Get player last 10 games
+        """
+
+        # get player games sorted by date
+        games = self.games_details_df[self.games_details_df["PLAYER_NAME"] == name].sort_values(
+            by="GAME_DATE_EST")
+
+        # get last 10 games
+        last_10_games = games.tail(10)
+
+        # reorder from oldest to newest
+        last_10_games = last_10_games.sort_values(by="GAME_DATE_EST", ascending=False)
+
+        # return last 10 games
+        return last_10_games
+
+    def get_career_avg(self, name):
+        """
+        Get player career average
+        """
+
+        # get player average stats
+        avg_stats = self.games_details_df[self.games_details_df["PLAYER_NAME"] == name].mean()
+
+        # return average stats
+        return avg_stats
+
+    def get_player_avg_per_season(self, name):
+        """
+        Get player average per season
+        """
+
+        # get player games
+        games = self.games_details_df[self.games_details_df["PLAYER_NAME"] == name]
+
+        # years column from GAME_DATE_EST
+        games["SEASON"] = games["GAME_DATE_EST"].apply(lambda x: x[:4])
+
+        # get player average per season
+        season_averages = games.groupby("SEASON").mean()
+
+        # return average per season
+        return season_averages
+        
 def main():
     """
     Main function
@@ -88,13 +171,8 @@ def main():
     # create EverythingHoopsAPI object
     hoops_api = EverythingHoopsAPI()
 
-    # get average statline
-    avg_statline = hoops_api.get_avg_statline(
-        "LeBron James", ["2019-01-01", "2019-12-31"])
-
-    # print average statline
-    print(avg_statline)
-
+    # get last 10 games for player
+    print(hoops_api.get_player_avg_per_season("LeBron James"))
 
 if __name__ == "__main__":
     main()
