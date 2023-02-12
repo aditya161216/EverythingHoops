@@ -34,6 +34,9 @@ class EverythingHoopsDB:
         self.players_data_df = pd.read_csv(
             "backend/data/player_data.csv", dtype=str)
 
+        # read in games csv
+        self.games_df = pd.read_csv("backend/data/games.csv", dtype=str)
+
         # read in games_details csv
         self.games_details_df = pd.read_csv(
             "backend/data/games_details.csv", dtype=str)
@@ -79,8 +82,8 @@ class EverythingHoopsDB:
         # add game_score column
         self.game_score()
 
-        # read in games csv
-        self.games_df = pd.read_csv("backend/data/games.csv", dtype=str)
+        # add game_dates
+        self.game_dates()
 
         self.player_ids = pd.read_csv("backend/data/Nba player ids.csv", dtype=str)
 
@@ -121,6 +124,18 @@ class EverythingHoopsDB:
 
 
         self.player_ids.to_pickle("backend/data/player_ids.pkl")
+
+    def game_dates(self):
+        """
+        Add game dates to games_details_df
+        """
+        
+       # get game dates from games_df
+        game_dates = self.games_df[["GAME_ID", "GAME_DATE_EST"]]
+
+        # merge game_dates into games_details_df
+        self.games_details_df = pd.merge(
+            self.games_details_df, game_dates, on="GAME_ID")
 
     def game_score(self):
         """
