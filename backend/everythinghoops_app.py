@@ -130,6 +130,21 @@ def player_progression():
     return response
 
 
+@app.route("/player/names")
+def player_names():
+    """
+    Player names page
+    """
+
+    # get player names
+    player_names = hoops_api.get_all_unique_players()
+
+    # return jsonified player names
+    response = jsonify(player_names)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
 @app.route("/date", methods=['GET'])
 def date():
     """

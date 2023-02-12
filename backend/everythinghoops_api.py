@@ -220,6 +220,26 @@ class EverythingHoopsAPI:
 
         # return points, assists, and rebounds
         return statline.to_dict(orient="records")[0]
+
+    def get_all_unique_players(self):
+        """
+        Get all unique players
+        """
+
+        # get all unique players
+        self.games_details_df["PLAYER_NAME"].unique()
+
+        # dict of player names and player names as string
+        player_names = {}
+
+        # iterate through unique players
+        for player in self.games_details_df["PLAYER_NAME"].unique():
+                
+            # add player name to dict
+            player_names[player] = player
+
+        # return player names
+        return player_names
         
         
 def main():
