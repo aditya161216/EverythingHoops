@@ -154,6 +154,9 @@ class EverythingHoopsAPI:
         last_10_games["AWAY_TEAM"] = teams_1
         last_10_games["HOME_TEAM"] = teams_2
 
+        # transpose last 10 games
+        last_10_games = last_10_games.T
+
         # return last 10 games
         return last_10_games
 
@@ -194,11 +197,11 @@ def main():
     # create EverythingHoopsAPI object
     hoops_api = EverythingHoopsAPI()
 
-    # get best performance on day
-    best_performance = hoops_api.get_best_performance_on_day("2020-12-23")
+    # get last 10 games for player
+    last_10_games = hoops_api.get_player_last_10_games("LeBron James")
 
     # print last 10 games
-    print(best_performance)
+    print(last_10_games)
 
 if __name__ == "__main__":
     main()
