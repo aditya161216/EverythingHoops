@@ -5,6 +5,7 @@ import Datepage from "./components/pages/DateInTime";
 import PlayerStats from "./components/player/PlayerStats";
 import './App.css';
 import PlayerGraphs from "./components/player/PlayerGraphs";
+import Landing from "./components/pages/Landing";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/date" element={<Datepage/>}/>
           <Route path= "/players/:playerId/Stats" element={<PlayerStats/>}/>
           <Route path= "/players/:playerId/Graphs" element={<PlayerGraphs/>}/>
+          <Route path= "/landing" element={<Landing/>}/>
         </Routes>
       </Router>
     </div>
