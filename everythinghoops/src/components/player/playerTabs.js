@@ -16,7 +16,7 @@ const PlayerTabs = () => {
             </TabList>
 
             <TabPanel>
-                Stats
+               Basic Stats
             </TabPanel>
 
             <TabPanel>

@@ -93,8 +93,16 @@ const theme = {
 
 const searchData = [
     {
-        key: "Average NBA_position",
-        value: "Average NBA_position"
+        key: "Average NBA Guard",
+        value: "Average Guard"
+    },
+    {
+        key: "Average NBA Forward",
+        value: "Average Forward"
+    },
+    {
+        key: "Average NBA Center",
+        value: "Average Center"
     }
 ];
 

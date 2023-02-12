@@ -12,9 +12,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import {
-  CircularProgressbar,
-  CircularProgressbarWithChildren,
-  buildstyles
+  CircularProgressbar
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css"
 
