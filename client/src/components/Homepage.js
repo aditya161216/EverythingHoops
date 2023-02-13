@@ -58,7 +58,7 @@ const HomePage = () => {
 
 
               <button onClick={ () => beginQuery()}>Submit!</button>
-              {visible ? <Performance name={data["PLAYER_NAME"]}/> : null}
+              {visible ? <Performance name={data["PLAYER_NAME"]} points={data["PTS"]} rebounds={data["REB"]} assists={data["AST"]} date={data["GAME_DATE_EST"]} /> : null}
           </div>
         </div>
       </div>

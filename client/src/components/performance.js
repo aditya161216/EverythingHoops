@@ -3,13 +3,16 @@ import React, { useEffect , useState} from "react";
 
 
 //take a date prop to eventually use?
-const Performance = ( {name, Points, Rebounds, Assists} ) => {
-    console.log(name)
+const Performance = ( props ) => {
+
+    //TODO make the error handling for date in time much better, maybe if theres an error with the fetch, render a message.
+
+    console.log(props.name)
     //in here fetch for the data with the date, and then render the items from the resulting query.
     const [playerid, setPID] = useState(0);
 
     const changeString = () => {
-        let number = name.replaceAll(" ", "%20");
+        let number = props.name.replaceAll(" ", "%20");
         console.log(number);
         let url = "http://127.0.0.1:8000/player?player_name="
         let concat = url.concat(number);
@@ -22,7 +25,6 @@ const Performance = ( {name, Points, Rebounds, Assists} ) => {
         let url2 = url.concat(String(playerid)).concat(".jpg")
         console.log(url2)
         return url2
-
     }
 
     useEffect( () =>
@@ -36,9 +38,11 @@ const Performance = ( {name, Points, Rebounds, Assists} ) => {
     <div className="flex"> 
         <img width="200" height="200" src={String(createIDString())}/>
         <div className="flex flex-col">
-             <span>Points: {Points} </span> 
-             <span>Rebounds: {Rebounds} </span> 
-             <span>Assists: {Assists} </span> 
+             <span>{props.name}</span>
+             <span>Points: {props.points}</span> 
+             <span>Rebounds: {props.rebounds}</span> 
+             <span>Assists: {props.assists}</span> 
+             <span>Game Date: {props.date}</span>
         </div>
     </div>
     );
