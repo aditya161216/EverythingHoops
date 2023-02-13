@@ -3,6 +3,7 @@ import React, { useEffect , useState} from "react";
 
 
 //take a date prop to eventually use?
+//test to see if I still need to merge
 const Performance = ( props ) => {
 
     //TODO make the error handling for date in time much better, maybe if theres an error with the fetch, render a message.
