@@ -251,17 +251,17 @@ class EverythingHoopsAPI:
         
 def main():
     """
-    Main function
+    Main function for testing
     """
 
     # create EverythingHoopsAPI object
     hoops_api = EverythingHoopsAPI()
 
-    # get last 10 games for player
-    last_10_games = hoops_api.get_player_last_10_games("LeBron James")
+    # get performance on day
+    performance = hoops_api.get_best_performance_on_day("2017-10-17")
 
     # print last 10 games
-    print(last_10_games)
+    print(performance)
 
 if __name__ == "__main__":
     main()
