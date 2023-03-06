@@ -15,3 +15,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.font {
+  font-family: 'Bebas Neue';
+}
+
+.font-poppins {
+  font-family: 'Poppins';
+}

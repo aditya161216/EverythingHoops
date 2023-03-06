@@ -5,8 +5,8 @@ const Header = () => {
 
     return (
         <div>
-            <div className="flex justify-evenly bg-black text-white font-sans">
-                <div className="font-sans text-xl font-bold"> 
+            <div className="flex justify-between bg-black text-white font-sans px-4">
+                <div className="text-5xl font"> 
                     Everything Hoops
                 </div>
 
