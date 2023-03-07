@@ -80,7 +80,7 @@ const Landing = () => {
                         </div>
                     </div>
 
-                    <span className="bg-orange-400 font-poppins text-white rounded-md" onClick={e => beginQuery()}> Search</span>
+                    <span className="bg-orange-400 font-poppins text-white px-4 my-2 rounded-md" onClick={e => beginQuery()}> Search</span>
                 </div>
         </div>
     )

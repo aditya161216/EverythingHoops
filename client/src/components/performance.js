@@ -37,7 +37,7 @@ const Performance = ( props ) => {
 
     return (
     <div className="flex flex-col"> 
-        <img width="230" height="328" className="py-8" src={String(createIDString())}/>
+        <img width="200" height="200" className="py-8" src={String(createIDString())}/>
         <div className="flex flex-col font-poppins gap-y-1">
              <span className="text-4xl font-bold">{props.name}</span>
              <span>Points: {props.points}</span> 
